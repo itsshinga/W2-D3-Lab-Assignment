@@ -10,21 +10,28 @@ const Cart = ({ products }) => {
       {cartProducts.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        cartProducts.map((product) => (
-          <div key={product.id} className="border-bottom py-3">
-            <h5>{product.desc}</h5>
-            <div className="d-flex align-items-center">
-              <img
-                src={product.image}
-                alt={product.desc}
-                style={{ width: "80px", height: "80px", objectFit: "cover" }}
-              />
-              <div className="ms-4">
-                <p>Quantity: {product.value}</p>
+        <>
+          {cartProducts.map((product) => (
+            <div key={product.id} className="border-bottom py-3">
+              <h5>{product.desc}</h5>
+              <div className="d-flex align-items-center">
+                <img
+                  src={product.image}
+                  alt={product.desc}
+                  style={{ width: "80px", height: "80px", objectFit: "cover" }}
+                />
+                <div className="ms-4">
+                  <p>Quantity: {product.value}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))
+          ))}
+
+          {/* Check Out button that currently does nothing */}
+          <button className="btn btn-primary mt-3">
+            Check Out
+          </button>
+        </>
       )}
     </div>
   );
