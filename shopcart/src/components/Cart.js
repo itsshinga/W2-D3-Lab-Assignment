@@ -17,9 +17,17 @@ const Cart = ({ products, user }) => {
 
   return (
     <div className="container mt-4">
-      <h2>Your Cart</h2>
+      <h2>Your Cart Items</h2>
       {cartProducts.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <>
+          <p>There are 0 items in your cart.</p>
+          <button
+            className="btn btn-success mt-3"
+            onClick={() => navigate("/")}
+          >
+            Continue Shop
+          </button>
+        </>
       ) : (
         <>
           {cartProducts.map((product) => (
@@ -37,7 +45,10 @@ const Cart = ({ products, user }) => {
               </div>
             </div>
           ))}
-          <button className="btn btn-primary mt-3" onClick={handleCheckoutClick}>
+          <button
+            className="btn btn-primary mt-3"     
+            onClick={handleCheckoutClick}
+          >
             Check Out
           </button>
         </>
