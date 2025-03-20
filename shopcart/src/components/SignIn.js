@@ -43,8 +43,9 @@ function SignIn() {
   return (
     <div className="container">
       <Card style={{ width: '800px' }} className="mx-auto mt-5">
-        <Card.Header className="pb-4">
-          <h1>Sign In</h1>
+      <Card.Header className="pb-4">
+          {/* Conditionally change the title based on login status */}
+          <h1>{login ? "Check Out" : "Sign In"}</h1>
         </Card.Header>
         <Card.Body>
           <Card.Text>
@@ -56,7 +57,7 @@ function SignIn() {
 
                 {/* Facebook Login Button */}
                 <FacebookLogin
-                  appId="2517126948644877"  // <-- your Facebook app ID
+                  appId="2517126948644877"  
                   autoLoad={false}
                   fields="name,email,picture"
                   scope="public_profile,user_friends"
@@ -77,12 +78,13 @@ function SignIn() {
 // A separate Home component to show user info after login
 function Home({ fbpic, fbdata }) {
   return (
+      
     <>
       <img src={fbpic} alt={fbdata.name} style={{ borderRadius: '50%' }} />
       <h3 className="d-inline text-success mx-2">
         Welcome back {fbdata.name}!
       </h3>
-      <p className="my-5">This is the home page of the app.</p>
+      <p className="my-5">Time to check out?</p>
     </>
   );
 }
