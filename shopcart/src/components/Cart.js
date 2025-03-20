@@ -1,8 +1,19 @@
 // src/components/Cart.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Cart = ({ products }) => {
+const Cart = ({ products, user }) => {
+  const navigate = useNavigate();
   const cartProducts = products.filter((product) => product.value > 0);
+
+  const handleCheckoutClick = () => {
+    console.log("Check Out clicked. User:", user);
+    if (!user) {
+      navigate("/signin");
+    } else {
+      navigate("/checkout");
+    }
+  };
 
   return (
     <div className="container mt-4">
@@ -26,9 +37,7 @@ const Cart = ({ products }) => {
               </div>
             </div>
           ))}
-
-          {/* Check Out button that currently does nothing */}
-          <button className="btn btn-primary mt-3">
+          <button className="btn btn-primary mt-3" onClick={handleCheckoutClick}>
             Check Out
           </button>
         </>

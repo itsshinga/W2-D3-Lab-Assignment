@@ -1,8 +1,11 @@
+// src/App.js
 import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import DisplayProducts from "./components/displayProducts";
 import Cart from "./components/Cart";
+import SignIn from "./components/SignIn";
+import Checkout from "./components/Checkout";
 import productsData from "./data/products";
 
 class App extends Component {
@@ -10,10 +13,11 @@ class App extends Component {
     super(props);
     this.state = {
       products: productsData,
+      user: null, // store user data after login
     };
   }
 
-  // Handler to increment product quantity
+  // Increase product quantity
   handleAdd = (product) => {
     const products = this.state.products.map((p) => {
       if (p.id === product.id) {
@@ -24,7 +28,7 @@ class App extends Component {
     this.setState({ products });
   };
 
-  // Handler to decrement product quantity
+  // Decrease product quantity
   handleSubtract = (product) => {
     const products = this.state.products.map((p) => {
       if (p.id === product.id && p.value > 0) {
@@ -35,9 +39,14 @@ class App extends Component {
     this.setState({ products });
   };
 
-  // Calculate total quantity
+  // Total cart quantity
   getTotalQuantity = () => {
     return this.state.products.reduce((acc, p) => acc + p.value, 0);
+  };
+
+  // Save user data on login
+  handleLogin = (userData) => {
+    this.setState({ user: userData });
   };
 
   render() {
@@ -58,8 +67,10 @@ class App extends Component {
             />
             <Route
               path="/cart"
-              element={<Cart products={this.state.products} />}
+              element={<Cart products={this.state.products} user={this.state.user} />}
             />
+            <Route path="/signin" element={<SignIn onLogin={this.handleLogin} />} />
+            <Route path="/checkout" element={<Checkout user={this.state.user} />} />
           </Routes>
         </div>
       </Router>
